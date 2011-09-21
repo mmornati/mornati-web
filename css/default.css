@@ -1,0 +1,155 @@
+html, body {
+	height: 100%;
+}
+body {
+	text-align: center;   /* horizontal centering hack for IE */
+	padding: 0;           /* required to "hide" distance div */
+	margin: 0;            /* required to "hide" distance div */
+	background: #808080;
+	font: 11px /16px "Lucida Grande", Verdana, sans-serif;
+	text-shadow: 0 1px 0 #FFFFFF;
+	/* Mozilla: */
+	background: -moz-linear-gradient(top, #808080, #2F4F4F);
+	/* Chrome, Safari:*/
+	background: -webkit-gradient(linear,
+	left top, left bottom, from(#808080), to(#2F4F4F));
+	/* MSIE */
+	filter: progid
+	: DXImageTransform.Microsoft.Gradient(
+	StartColorStr='#808080', EndColorStr='#2F4F4F', GradientType=0);
+}
+* {
+	border: 0 none;
+	font-size: 1em;
+	list-style: none outside none;
+	margin: 0;
+	outline: medium none;
+	padding: 0;
+	text-decoration: none;
+}
+#tabs {
+	min-height: 513px;
+}
+#networks {
+	background: url("../images/networks.png") repeat scroll 0 0 transparent;
+	float: left;
+	width: 100%;
+}
+a {
+	color: #666666;
+}
+#networks li {
+	float: left;
+	height: 80px;
+	width: 290px;
+	list-style: none;
+}
+#networks li a img {
+	float: left;
+	margin: 0 10px 0 15px;
+}
+#networks li a {
+	display: block;
+	height: 45px;
+	padding: 10px 0 5px;
+	text-decoration: none;
+	width: 255px;
+}
+#networks li a strong {
+	color: #000000;
+	display: block;
+	font: 18px /20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+	padding-top: 2px;
+}
+#tweets li {
+	background-position: 5px 5px;
+	background-repeat: no-repeat;
+	border: 1px solid #999999;
+	height: auto;
+	list-style: none outside none;
+	margin-bottom: 2px;
+	min-height: 55px;
+	padding-left: 65px;
+	padding-top: 2px;
+	width: 500px;
+}
+#content {
+	text-align: left;
+	width: 640px;
+	height: 520px;
+	border: thick solid;
+	background: #fff;
+	border-color: #f99;
+	margin: 0 auto;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -320px;
+	margin-top: -260px;
+}
+
+#photo {
+	padding-top: 40px;
+}
+#code {
+	height: 450px;
+	overflow: auto;
+}
+#code.loading {
+	background: url(../images/background-code-loading.gif) center center no-repeat;
+}
+#code .commit {
+	background: url(../images/background-commit.png) repeat-x;
+	cursor: pointer;
+	height: 40px;
+	overflow: hidden;
+	padding: 0 10px;
+}
+#code .commit .repository {
+	color: #000;
+	display: block;
+	font: bold 13pt 'Calibri', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	float: left;
+	line-height: 43px;
+	text-decoration: none;
+}
+#code .commit .date {
+	color: #888;
+	float: right;
+	line-height: 42px;
+}
+#code .commit .message {
+	line-height: 42px;
+	overflow: hidden;
+	padding-left: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+#code .commit-description {
+	background: url(../images/background-code-description.gif);
+	color: #fff;
+	padding: 10px;
+	-moz-box-shadow: inset #000 0 0 3px;
+	-webkit-box-shadow: inset #000 0 0 3px;
+}
+#code .commit-description p {
+	font-size: 14px;
+	font-weight: bold;
+	text-shadow: #000 0 1px 2px;
+}
+#code .commit-description .link {
+	background-color: rgba(0, 0, 0, 0.3);
+	display: inline-block;
+	padding: 5px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+#code code {
+	display: block;
+	font: 11pt 'consolas', 'Monaco', monospace;
+	margin-bottom: 10px;
+	/*  overflow:auto;*/
+	padding: 0 10px;
+	/*  white-space:pre;*/
+}
+
