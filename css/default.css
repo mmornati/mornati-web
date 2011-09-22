@@ -50,7 +50,7 @@ a {
 }
 #networks li a {
 	display: block;
-	height: 45px;
+	height: 65px;
 	padding: 10px 0 5px;
 	text-decoration: none;
 	width: 300px;
@@ -61,6 +61,18 @@ a {
 	font: 18px /20px "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding-top: 2px;
 }
+#networks li a:hover, #networks li a:focus {
+    background: none repeat scroll 0 0 rgba(164, 173, 183, 0.15);
+}
+#networks li a:active {
+    background: none repeat scroll 0 0 rgba(164, 173, 183, 0.25);
+    padding: 12px 0 3px;
+}
+
+#networks li a:hover img {
+    margin-left: 10px;
+}
+
 #tweets li {
 	background-position: 5px 5px;
 	background-repeat: no-repeat;
@@ -157,4 +169,11 @@ a {
 	height:460px;
 	font-size:14px;
 	background-color:#fff;
+}
+
+#typeimage {
+	position: absolute;
+	top: 460px;
+	right: 240px;
+	
 }
