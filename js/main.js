@@ -1,52 +1,63 @@
 $(document).ready(function() {
 	$("ul.tabs").tabs("div.panes > div");
-	twitter();
+	twitter_jquery();
 	if(!GitHubList.initialized) {
 		GitHubList.pull();
 	}
 	markeclaudioFlickrBox("10615322@N07");
 
+	$('.typeimage').click(function() {
+		$("#bsod").show();
+		$("#bsod").click(function() {
+			$('#bsod').hide();
+		});
+	});
 });
-function twitter() {
-	var twitterJSON = document.createElement("script");
-	twitterJSON.type = "text/javascript"
-	//here's the search URL
-	twitterJSON.src = "http://search.twitter.com/search.json?callback=twitterSearch&q=mornati"
-	document.getElementsByTagName("head")[0].appendChild(twitterJSON);
-	return false;
-}
+function twitter_jquery() {
+	var twitter_api_url = 'http://search.twitter.com/search.json';
 
-function twitterSearch(obj) {
-	//this is the div I'm writing the content to
-	var tDiv = document.getElementById("tweets");
-	var user, bgcolor, tweet, postedAt, icon, userURL;
-	//start the ul
-	tDiv.innerHTML = "<ul>"
-	var maxTweets = 7;
-	if(obj.results.length < maxTweets) {
-		maxTweets = obj.results.length;
-	}
-	for( i = 0; i < maxTweets; i++) {
-		//Look at me use the JavaScript modulus operator to do even/odd rows.
-		if(i % 2) {
-			bgcolor = "#efefef"
-		} else {
-			bgcolor = "#ddd"
-		}
-		//we need to get some data out of the object
-		//and populate some variables.
-		//i could do this inline in the string below,
-		//but this is way easier for you to read
-		icon = obj.results[i].profile_image_url;
-		user = obj.results[i].from_user;
-		userURL = "http://twitter.com/" + user;
-		tweet = obj.results[i].text;
-		postedAt = obj.results[i].created_at;
-		//and here I mash it all up into a fancy li
-		tDiv.innerHTML += "<li style='background-color:" + bgcolor + "; background-image: url(" + icon + "); background-repeat:no-repeat;'><strong><a href='" + userURL + "'>" + user + "</a></strong>: " + tweet + " <span class='time'>(" + postedAt + " GMT)</span> </li>";
-	}
-	//and close the UL
-	tDiv.innerHTML += "</ul>";
+	// Enable caching
+	$.ajaxSetup({
+		cache : true
+	});
+
+	// Send JSON request
+	// The returned JSON object will have a property called "results" where we find
+	// a list of the tweets matching our request query
+	$.getJSON(twitter_api_url + '?callback=?&q=mornati', function(data) {
+		var user, bgcolor, tweet, postedAt, icon, userURL;
+		$('#tweets').empty();
+		$('#tweets').append("<ul>");
+		$.each(data.results, function(i, tweet) {
+			// Uncomment line below to show tweet data in Fire Bug console
+			// Very helpful to find out what is available in the tweet objects
+			console.log(tweet);
+
+			// Before we continue we check that we got data
+			if(tweet.text != undefined) {
+
+				// Build the html string for the current tweet
+				var tweet_html
+				if(i % 2) {
+					bgcolor = "#efefef"
+				} else {
+					bgcolor = "#ddd"
+				}
+				icon = tweet.profile_image_url;
+				user = tweet.from_user;
+				userURL = "http://twitter.com/" + user;
+				tweet_text = tweet.text;
+				postedAt = tweet.created_at;
+				//and here I mash it all up into a fancy li
+				tweet_html = "<li style='background-color:" + bgcolor + "; background-image: url(" + icon + "); background-repeat:no-repeat;'><strong><a href='" + userURL + "'>" + user + "</a></strong>: " + tweet_text + " <span class='time'>(" + postedAt + " GMT)</span> </li>";
+
+				// Append html string to tweet_container div
+				$('#tweets').append(tweet_html);
+			}
+			
+		});
+		$('#tweets').append("</ul>");
+	});
 }
 
 var GitHubList = {
