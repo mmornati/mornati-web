@@ -4,15 +4,7 @@ $(document).ready(function() {
 	if(!GitHubList.initialized) {
 		GitHubList.pull();
 	}
-	$('#flickr').flickrGallery({
-		useFlickr : 'true',
-		flickrAPIKey : '61e0228654d770c25b4dc06986153514',
-		photosetID : '72157627301338719',
-		useHoverIntent : 'true',
-		useLightBox : 'true',
-		galleryHeight: "300px",
-		useFlickrLargeSize: 'true'
-	});
+	markeclaudioFlickrBox("10615322@N07");
 
 });
 function twitter() {
