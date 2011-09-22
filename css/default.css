@@ -53,7 +53,7 @@ a {
 	height: 45px;
 	padding: 10px 0 5px;
 	text-decoration: none;
-	width: 255px;
+	width: 300px;
 }
 #networks li a strong {
 	color: #000000;
@@ -81,18 +81,9 @@ a {
 	background: #fff;
 	border-color: #f99;
 	margin: 0 auto;
-	position: absolute;
-	left: 50%;
-	top: 50%;
-	margin-left: -320px;
-	margin-top: -260px;
 }
 
-#photo {
-	padding-top: 40px;
-}
 #code {
-	height: 450px;
 	overflow: auto;
 }
 #code.loading {
@@ -153,3 +144,17 @@ a {
 	/*  white-space:pre;*/
 }
 
+#flickr {
+	background-color: #000;
+	border: 2px solid white;
+}
+
+.panes div.firstlevel {
+	display:none;		
+	padding:15px 10px;
+	border:1px solid #999;
+	border-top:0;
+	height:460px;
+	font-size:14px;
+	background-color:#fff;
+}

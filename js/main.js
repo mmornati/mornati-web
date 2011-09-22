@@ -1,17 +1,27 @@
 $(document).ready(function() {
-	$('#tabs').tabs();
+	$("ul.tabs").tabs("div.panes > div");
 	twitter();
-	if (!GitHubList.initialized)	{
+	if(!GitHubList.initialized) {
 		GitHubList.pull();
 	}
+	$('#flickr').flickrGallery({
+		useFlickr : 'true',
+		flickrAPIKey : '61e0228654d770c25b4dc06986153514',
+		photosetID : '72157627301338719',
+		useHoverIntent : 'true',
+		useLightBox : 'true',
+		galleryHeight: "300px",
+		useFlickrLargeSize: 'true'
+	});
+
 });
 function twitter() {
-    var twitterJSON = document.createElement("script");
-    twitterJSON.type="text/javascript"
-    //here's the search URL
-    twitterJSON.src="http://search.twitter.com/search.json?callback=twitterSearch&q=mornati"
-    document.getElementsByTagName("head")[0].appendChild(twitterJSON);
-    return false;
+	var twitterJSON = document.createElement("script");
+	twitterJSON.type = "text/javascript"
+	//here's the search URL
+	twitterJSON.src = "http://search.twitter.com/search.json?callback=twitterSearch&q=mornati"
+	document.getElementsByTagName("head")[0].appendChild(twitterJSON);
+	return false;
 }
 
 function twitterSearch(obj) {
@@ -21,7 +31,7 @@ function twitterSearch(obj) {
 	//start the ul
 	tDiv.innerHTML = "<ul>"
 	var maxTweets = 7;
-	if (obj.results.length < maxTweets) {
+	if(obj.results.length < maxTweets) {
 		maxTweets = obj.results.length;
 	}
 	for( i = 0; i < maxTweets; i++) {
@@ -41,35 +51,35 @@ function twitterSearch(obj) {
 		tweet = obj.results[i].text;
 		postedAt = obj.results[i].created_at;
 		//and here I mash it all up into a fancy li
-		tDiv.innerHTML += "<li style='background-color:" + bgcolor + "; background-image: url("+icon+"); background-repeat:no-repeat;'><strong><a href='" + userURL + "'>" + user + "</a></strong>: " + tweet + " <span class='time'>(" + postedAt + " GMT)</span> </li>";
+		tDiv.innerHTML += "<li style='background-color:" + bgcolor + "; background-image: url(" + icon + "); background-repeat:no-repeat;'><strong><a href='" + userURL + "'>" + user + "</a></strong>: " + tweet + " <span class='time'>(" + postedAt + " GMT)</span> </li>";
 	}
 	//and close the UL
 	tDiv.innerHTML += "</ul>";
 }
 
 var GitHubList = {
-	initialized: false,
-	latestCommit: false,
-	pull: function() {
+	initialized : false,
+	latestCommit : false,
+	pull : function() {
 		GitHubList.initialized = true;
 		// TODO: Catch JSON parser errors - why doesn't jQuery offer something for this?
 		$.getScript('http://github.com/mmornati.json?callback=GitHubList.parseData&' + (new Date() - 1.0), function() {
 
 		});
 	},
-	parseData: function(commits) {
-	  var code = $('#code');
-	  code.addClass('loading');
+	parseData : function(commits) {
+		var code = $('#code');
+		code.addClass('loading');
 		var commitIndex = 0, fadeLength = 500;
 		$.each(commits, function(i) {
 			var date = Date.parse(this.created_at);
-			if (this.type == 'PushEvent' && this.repository && (!GitHubList.latestCommit || GitHubList.latestCommit < date)) {
+			if(this.type == 'PushEvent' && this.repository && (!GitHubList.latestCommit || GitHubList.latestCommit < date)) {
 				// If it's a PushEvent, AND we haven't seen it before, add it to the list
 				commitIndex += 1;
 				var date = new Date(Date.parse(this.created_at));
 				var codeItem = $('<div class="commit"><span class="repository">' + this.repository.name + '</span><div class="date">' + (date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()) + '</div><div class="message" title="' + this.payload.shas[0][2] + '">' + this.payload.shas[0][2] + '</div></div>');
 				var codeDescription = $('<div class="commit-description"></div>');
-				if (this.repository.description != '') {
+				if(this.repository.description != '') {
 					codeDescription.append('<p>' + this.repository.description + '</p>');
 				} else {
 					// codeDescription.append("<p>&lt;I'm apparently too lazy to add a description&gt;</p>");
@@ -80,7 +90,7 @@ var GitHubList = {
 				code.append(codeDescription.hide());
 				codeItem.click(function(event) {
 					event.preventDefault();
-					if (codeItem.hasClass('active')) {
+					if(codeItem.hasClass('active')) {
 						codeItem.removeClass('active');
 						codeDescription.slideUp();
 					} else {
@@ -96,7 +106,9 @@ var GitHubList = {
 				this.latestCommit = this.id;
 			}
 		});
-		setTimeout(function() { code.removeClass('loading'); }, commitIndex * (fadeLength / 5));
+		setTimeout(function() {
+			code.removeClass('loading');
+		}, commitIndex * (fadeLength / 5));
 		// Pull again in 20 minutes
 		setTimeout(GitHubList.pull, 1200000);
 	}
