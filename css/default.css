@@ -36,7 +36,6 @@ body:after
 	min-height: 513px;
 }
 #networks {
-	background: url("../images/networks.png") repeat scroll 0 0 transparent;
 	float: left;
 	width: 100%;
 }
