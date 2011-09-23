@@ -18,6 +18,13 @@ body {
 	: DXImageTransform.Microsoft.Gradient(
 	StartColorStr='#808080', EndColorStr='#2F4F4F', GradientType=0);
 }
+
+body:after
+{
+	content: url(../images/typeimages/gallery.png) url(../images/typeimages/github.png) url(../images/typeimages/network.png) url(../images/typeimages/twitter.png);
+	display: none;
+}
+
 * {
 	border: 0 none;
 	font-size: 1em;
