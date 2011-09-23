@@ -7,7 +7,7 @@ $(document).ready(function() {
 	}
 	markeclaudioFlickrBox("10615322@N07");
 
-	$('.typeimage').click(function() {
+	$('#areaimage').click(function() {
 		$("#bsod").show();
 		$("#bsod").click(function() {
 			$('#bsod').hide();
