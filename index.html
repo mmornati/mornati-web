@@ -24,88 +24,97 @@
 		<meta name="Robots" content="INDEX,FOLLOW" />
 	</head>
 	<body>
-		<div id="content">
-			<div id="closecontainer">
-				<img id="closeimage" src="images/close.png" style="position:absolute" height="40" width="40" alt="Close" />
+		<div id="maincontainer">
+			<div id="content">
+				<div id="closecontainer">
+					<a href="http://github.com/mmornati/mornati-web" id="fork-me" title="Fork me on Github" target="_blank"></a>
+					<img id="closeimage" src="images/close.png" style="position:absolute" height="40" width="40" alt="Close" />
+				</div>
+				<div id="areacontainer">
+					<img id="areaimage" src="images/typeimages/network.png" style="position:absolute" height="128" width="128" alt="Area Image" />
+				</div>
+				<ul class="tabs">
+					<li>
+						<a href="#" onclick="changeImage('network');">Network</a>
+					</li>
+					<li>
+						<a href="#" onclick="changeImage('twitter');">Tweets</a>
+					</li>
+					<li>
+						<a href="#" onclick="changeImage('flickr');">Photos</a>
+					</li>
+					<li>
+						<a href="#" onclick="changeImage('code');">GitHub Activity</a>
+					</li>
+				</ul>
+				<div class="panes">
+					<div id="photo" class="firstlevel">
+						<ul id="networks" class="node" style="display: block;">
+							<li>
+								<a href="http://twitter.com/marcomornati"> <img width="60" alt="Twitter" src="images/twitter.png"> <strong>Twitter</strong> twitter.com/marcomornati </a>
+							</li>
+							<li>
+								<a href="http://www.flickr.com/photos/marcomornati/"> <img width="60" alt="Flickr" src="images/flickr.png"> <strong>Flickr</strong> photos/marcomornati</a>
+							</li>
+							<li>
+								<a href="http://facebook.com/mmornati"> <img width="60" alt="Facebook" src="images/facebook.png"> <strong>Facebook</strong> facebook.com/mmornati </a>
+							</li>
+							<li>
+								<a href="http://fr.linkedin.com/in/marcomornati"> <img width="60" alt="LinkedIn" src="images/linkedin.png"> <strong>LinkedIn</strong> linkedin.com/in/marcomornati </a>
+							</li>
+							<li>
+								<a href="http://www.youtube.com/mmornati"> <img width="60" alt="Youtube" src="images/youtube.png"> <strong>YouTube</strong> youtube.com/mmornati </a>
+							</li>
+							<li>
+								<a href="https://it.foursquare.com/marcomornati"> <img width="60" alt="FourSquare" src="images/foursquare.png"> <strong>FourSquare</strong> foursquare.com/marcomornati </a>
+							</li>
+							<li>
+								<a href="skype:marco.mornati?call"> <img width="60" alt="Skype" src="images/skype.png"> <strong>Skype</strong> marco.mornati </a>
+							</li>
+							<li>
+								<a href="http://blog.mornati.net"> <img width="60" alt="Wordpress" src="images/wordpress.png"> <strong>Blog</strong> blog.mornati.net </a>
+							</li>
+						</ul>
+					</div>
+					<div id="tweetcontainer" class="firstlevel">
+						Twitter query: <b>mornati</b>
+						<ul id="tweets"></ul>
+					</div>
+					<div class="firstlevel">
+						<div id="flickrbox"></div>
+					</div>
+					<div id="code" class="firstlevel"></div>
+				</div>
 			</div>
-			<div id="areacontainer">
-				<img id="areaimage" src="images/typeimages/network.png" style="position:absolute" height="128" width="128" alt="Area Image" />
+			<div id="gameover" style="display: none;">
+				<center><img src="images/game-over.png"/></center>
+				<br/>
 			</div>
-			<ul class="tabs">
-				<li>
-					<a href="#" onclick="changeImage('network');">Network</a>
-				</li>
-				<li>
-					<a href="#" onclick="changeImage('twitter');">Tweets</a>
-				</li>
-				<li>
-					<a href="#" onclick="changeImage('flickr');">Photos</a>
-				</li>
-				<li>
-					<a href="#" onclick="changeImage('code');">GitHub Activity</a>
-				</li>
-			</ul>
-			<div class="panes">
-				<div id="photo" class="firstlevel">
-					<ul id="networks" class="node" style="display: block;">
-						<li>
-							<a href="http://twitter.com/marcomornati"> <img width="60" alt="Twitter" src="images/twitter.png"> <strong>Twitter</strong> twitter.com/marcomornati </a>
-						</li>
-						<li>
-							<a href="http://www.flickr.com/photos/marcomornati/"> <img width="60" alt="Flickr" src="images/flickr.png"> <strong>Flickr</strong> photos/marcomornati</a>
-						</li>
-						<li>
-							<a href="http://facebook.com/mmornati"> <img width="60" alt="Facebook" src="images/facebook.png"> <strong>Facebook</strong> facebook.com/mmornati </a>
-						</li>
-						<li>
-							<a href="http://fr.linkedin.com/in/marcomornati"> <img width="60" alt="LinkedIn" src="images/linkedin.png"> <strong>LinkedIn</strong> linkedin.com/in/marcomornati </a>
-						</li>
-						<li>
-							<a href="http://www.youtube.com/mmornati"> <img width="60" alt="Youtube" src="images/youtube.png"> <strong>YouTube</strong> youtube.com/mmornati </a>
-						</li>
-						<li>
-							<a href="https://it.foursquare.com/marcomornati"> <img width="60" alt="FourSquare" src="images/foursquare.png"> <strong>FourSquare</strong> foursquare.com/marcomornati </a>
-						</li>
-						<li>
-							<a href="skype:marco.mornati?call"> <img width="60" alt="Skype" src="images/skype.png"> <strong>Skype</strong> marco.mornati </a>
-						</li>
-						<li>
-							<a href="http://blog.mornati.net"> <img width="60" alt="Wordpress" src="images/wordpress.png"> <strong>Blog</strong> blog.mornati.net </a>
-						</li>
-					</ul>
-				</div>
-				<div class="firstlevel">
-					Twitter query: <b>mornati</b>
-					<ul id="tweets"></ul>
-				</div>
-				<div class="firstlevel">
-					<div id="flickrbox"></div>
-				</div>
-				<div id="code" class="firstlevel">
-				</div>
+			<span id="credits">
+				<center>
+					2011 Marco Mornati <br/>
+					Website inspired by <a href="http://timvandamme.com/" target="_blank">Tim Van Damme</a> and <a href="http://x451.com/" target="_blank">x451</a> works.
+				</center>
+			</span>
+			<div id="bsod" style="display: none;">
+				<span class="neg">ERROR 8798274c3</span>
+				<p>
+					SuperMegaGiga Error. You are clicking a lot!
+					<br />
+					Your mouse will be disabled. Now you can:
+				</p>
+				<p>
+					* Send me an email that will be put directly in the spam container.
+					<br />
+					* Press CTRL+ALT+DEL+1+2+3+4+5+M+O+R+N+A*2 jumping two times, to fix the problem
+					<br />
+					* Click everywhere as you can do.
+				</p>
+				Press any link to continue
+				<blink>
+					_
+				</blink>
 			</div>
-		</div>
-		<div id="bsod" style="display: none;">
-			<span class="neg">ERROR 8798274c3</span>
-			<p>
-				SuperMegaGiga Error. You are clicking a lot!
-				<br />
-				Your mouse will be disabled. Now you can:
-			</p>
-			<p>
-				* Send me an email that will be put directly in the spam container.
-				<br />
-				* Press CTRL+ALT+DEL+1+2+3+4+5+M+O+R+N+A*2 jumping two times, to fix the problem
-				<br />
-				* Click everywhere as you can do.
-			</p>
-			Press any link to continue
-			<blink>
-				_
-			</blink>
-		</div>
-		<div id="gameover" style="display: none;">
-			<img src="images/game-over.png"/><br/>
 		</div>
 	</body>
 </html>

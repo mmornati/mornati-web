@@ -8,18 +8,23 @@ $(document).ready(function() {
 	markeclaudioFlickrBox("10615322@N07");
 
 	$('#areaimage').click(function() {
+		$("#content").hide();
 		$("#bsod").show();
 		$("#bsod").click(function() {
 			$('#bsod').hide();
+			$("#content").show();
 		});
 	});
 	
 	$("#closeimage").click(function() {
 		$("#content").hide();
+		$("#credits").hide();
 		$("#gameover").show();
 		$("#gameover").click(function() {
+			$("html").unbind();	
 			$('#gameover').hide();
 			$('#content').show();
+			$("#credits").show();
 		});	
 		$("html").keypress(function(e) {
   			var code = (e.keyCode ? e.keyCode : e.which);
@@ -34,7 +39,6 @@ $(document).ready(function() {
 		});	
 	});
 });
-
 
 function twitter_jquery(query) {
 	var twitter_api_url = 'http://search.twitter.com/search.json';
