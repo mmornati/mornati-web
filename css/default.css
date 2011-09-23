@@ -100,6 +100,7 @@ a {
 	background: #fff;
 	border-color: #f99;
 	margin: 0 auto;
+	margin-top: 20px;
 }
 
 #code {
@@ -183,4 +184,12 @@ a {
 	position:relative;
 	top:440px;
 	left:570px;
+}
+
+#closecontainer {
+	width: 20px;
+	position:relative;
+	top:-20px;
+	left:620px;
+	z-index: 99999;
 }

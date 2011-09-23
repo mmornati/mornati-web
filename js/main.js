@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$("ul.tabs").tabs("div.panes > div");
 	changeImage('network');
-	twitter_jquery();
+	twitter_jquery("mornati");
 	if(!GitHubList.initialized) {
 		GitHubList.pull();
 	}
@@ -13,8 +13,30 @@ $(document).ready(function() {
 			$('#bsod').hide();
 		});
 	});
+	
+	$("#closeimage").click(function() {
+		$("#content").hide();
+		$("#gameover").show();
+		$("#gameover").click(function() {
+			$('#gameover').hide();
+			$('#content').show();
+		});	
+		$("html").keypress(function(e) {
+  			var code = (e.keyCode ? e.keyCode : e.which);
+  			if (code == 13) {
+  				$("html").unbind();	
+  				window.location.replace("games/MonkeyGame.html");	
+  			} else {
+  				alert("Wasn't the right key to play hidden game...");
+  				$("html").unbind();	
+  			}
+  			
+		});	
+	});
 });
-function twitter_jquery() {
+
+
+function twitter_jquery(query) {
 	var twitter_api_url = 'http://search.twitter.com/search.json';
 
 	// Enable caching
@@ -25,14 +47,14 @@ function twitter_jquery() {
 	// Send JSON request
 	// The returned JSON object will have a property called "results" where we find
 	// a list of the tweets matching our request query
-	$.getJSON(twitter_api_url + '?callback=?&q=mornati', function(data) {
+	$.getJSON(twitter_api_url + '?callback=?&q='+query, function(data) {
 		var user, bgcolor, tweet, postedAt, icon, userURL;
 		$('#tweets').empty();
 		$('#tweets').append("<ul>");
 		$.each(data.results, function(i, tweet) {
 			// Uncomment line below to show tweet data in Fire Bug console
 			// Very helpful to find out what is available in the tweet objects
-			console.log(tweet);
+			//console.log(tweet);
 
 			// Before we continue we check that we got data
 			if(tweet.text != undefined) {
