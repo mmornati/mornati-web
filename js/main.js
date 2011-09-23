@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	$("ul.tabs").tabs("div.panes > div");
+	changeImage('network');
 	twitter_jquery();
 	if(!GitHubList.initialized) {
 		GitHubList.pull();
@@ -116,3 +117,15 @@ var GitHubList = {
 		setTimeout(GitHubList.pull, 1200000);
 	}
 };
+
+function changeImage(area) {
+	if (area=='twitter') {
+		$('#areaimage').attr('src', 'images/typeimages/twitter.png');
+	} else if (area=='flickr') {
+		$('#areaimage').attr('src', 'images/typeimages/gallery.png');	
+	} else if (area=='code') {
+		$('#areaimage').attr('src', 'images/typeimages/github.png');	
+	} else if (area=='network') {
+		$('#areaimage').attr('src', 'images/typeimages/network.png');	
+	}	
+}

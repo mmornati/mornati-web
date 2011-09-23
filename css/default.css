@@ -171,9 +171,9 @@ a {
 	background-color:#fff;
 }
 
-.typeimage {
-	position: absolute;
-	top: 460px;
-	right: 240px;
-	
+#areacontainer {
+	width: 128px;
+	position:relative;
+	top:440px;
+	left:570px;
 }

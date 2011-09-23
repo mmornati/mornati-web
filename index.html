@@ -25,18 +25,21 @@
 	</head>
 	<body>
 		<div id="content">
+			<div id="areacontainer">
+				<img id="areaimage" src="images/typeimages/network.png" style="position:absolute" height="128" width="128" alt="Area Image" />
+			</div>
 			<ul class="tabs">
 				<li>
-					<a href="#">Network</a>
+					<a href="#" onclick="changeImage('network');">Network</a>
 				</li>
 				<li>
-					<a href="#">Tweets</a>
+					<a href="#" onclick="changeImage('twitter');">Tweets</a>
 				</li>
 				<li>
-					<a href="#">Photos</a>
+					<a href="#" onclick="changeImage('flickr');">Photos</a>
 				</li>
 				<li>
-					<a href="#">GitHub Activity</a>
+					<a href="#" onclick="changeImage('code');">GitHub Activity</a>
 				</li>
 			</ul>
 			<div class="panes">
@@ -67,20 +70,15 @@
 							<a href="http://blog.mornati.net"> <img width="60" alt="Wordpress" src="images/wordpress.png"> <strong>Blog</strong> blog.mornati.net </a>
 						</li>
 					</ul>
-					<div class="typeimage"><img src="images/typeimages/network.png">
-					</div>
 				</div>
 				<div class="firstlevel">
 					Twitter query: <b>mornati</b>
 					<ul id="tweets"></ul>
-					<span class="typeimage"><img src="images/typeimages/twitter.png"></span>
 				</div>
 				<div class="firstlevel">
 					<div id="flickrbox"></div>
-					<span class="typeimage"><img src="images/typeimages/gallery.png"></span>
 				</div>
 				<div id="code" class="firstlevel">
-					<span class="typeimage"><img src="images/typeimages/github.png"></span>
 				</div>
 			</div>
 		</div>
