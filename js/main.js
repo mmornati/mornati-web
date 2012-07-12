@@ -40,6 +40,11 @@ $(document).ready(function() {
 	});
 });
 
+function replaceURLWithHTMLLinks(text) {
+    var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+    return text.replace(exp,"<a href='$1'>$1</a>"); 
+}
+
 function twitter_jquery(query) {
 	var twitter_api_url = 'http://search.twitter.com/search.json';
 
@@ -73,7 +78,7 @@ function twitter_jquery(query) {
 				icon = tweet.profile_image_url;
 				user = tweet.from_user;
 				userURL = "http://twitter.com/" + user;
-				tweet_text = tweet.text;
+				tweet_text = replaceURLWithHTMLLinks(tweet.text);
 				postedAt = tweet.created_at;
 				//and here I mash it all up into a fancy li
 				tweet_html = "<li style='background-color:" + bgcolor + "; background-image: url(" + icon + "); background-repeat:no-repeat;'><strong><a href='" + userURL + "'>" + user + "</a></strong>: " + tweet_text + " <span class='time'>(" + postedAt + " GMT)</span> </li>";
