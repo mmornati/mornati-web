@@ -1,11 +1,11 @@
 $(document).ready(function() {
-	$("ul.tabs").tabs("div.panes > div");
+	$("#network").show();
 	changeImage('network');
-	twitter_jquery("mornati");
-	if(!GitHubList.initialized) {
-		GitHubList.pull();
-	}
-	markeclaudioFlickrBox("10615322@N07");
+	twitter_jquery("marcomornati");
+	//if(!GitHubList.initialized) {
+	//	GitHubList.pull();
+	//}
+	//markeclaudioFlickrBox("10615322@N07");
 
 	$('#areaimage').click(function() {
 		$("#content").hide();
@@ -38,6 +38,69 @@ $(document).ready(function() {
   			
 		});	
 	});
+	
+	$('#navigation a').stop().animate({'marginLeft':'-85px'},1000);
+
+    $('#navigation > li').hover(
+     	function () {
+        	$('a',$(this)).stop().animate({'marginLeft':'-2px'},200);
+        },
+        function () {
+        	$('a',$(this)).stop().animate({'marginLeft':'-85px'},200);
+        }
+    );
+    
+    $("#homelink").click(function() {
+    	if ($("#tweetcontainer").is(":visible")) {
+    		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#flickrbox").is(":visible")) {
+    		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#code").is(":visible")) {
+    		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} 
+    	$("#networks").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	changeImage('network');
+    });
+    
+    $("#twitterlink").click(function() {
+    	if ($("#networks").is(":visible")) {
+    		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#flickrbox").is(":visible")) {
+    		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#code").is(":visible")) {
+    		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} 
+    	$("#tweetcontainer").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	changeImage('twitter');
+    });
+    
+    $("#gallerylink").click(function() {
+    	if ($("#networks").is(":visible")) {
+    		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#tweetcontainer").is(":visible")) {
+    		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#code").is(":visible")) {
+    		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} 
+    	$("#flickrbox").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	markeclaudioFlickrBox("10615322@N07");
+    	changeImage('flickr');
+    });
+    
+    $("#codelink").click(function() {
+    	if ($("#networks").is(":visible")) {
+    		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#tweetcontainer").is(":visible")) {
+    		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#flickrbox").is(":visible")) {
+    		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} 
+    	$("#code").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	changeImage('code');
+    	if(!GitHubList.initialized) {
+			GitHubList.pull();
+		}
+    });
 });
 
 function replaceURLWithHTMLLinks(text) {

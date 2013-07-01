@@ -23,8 +23,15 @@
 		<meta name="Charset" content="UTF-8" />
 		<meta name="Robots" content="INDEX,FOLLOW" />
 	</head>
-	<body>
+	<body background="images/background.jpg">
 		<div id="maincontainer">
+			<ul id="navigation">
+            	<li class="home"><a id="homelink" href="#" title="Home"></a></li>
+            	<li class="twitter"><a id="twitterlink" href="#" title="Twitter"></a></li>
+            	<li class="gallery"><a id="gallerylink" href="#" title="Gallery"></a></li>
+            	<li class="code"><a id="codelink" href="#" title="Code"></a></li>
+            	<li class="about"><a href="" title="Rss Feed"></a></li>
+        	</ul>
 			<div id="content">
 				<div id="closecontainer">
 					<a href="http://github.com/mmornati/mornati-web" id="fork-me" title="Fork me on Github" target="_blank"></a>
@@ -33,22 +40,8 @@
 				<div id="areacontainer">
 					<img id="areaimage" src="images/typeimages/network.png" style="position:absolute" height="128" width="128" alt="Area Image" />
 				</div>
-				<ul class="tabs">
-					<li>
-						<a href="#" onclick="changeImage('network');">Network</a>
-					</li>
-					<li>
-						<a href="#" onclick="changeImage('twitter');">Tweets</a>
-					</li>
-					<li>
-						<a href="#" onclick="changeImage('flickr');">Photos</a>
-					</li>
-					<li>
-						<a href="#" onclick="changeImage('code');">GitHub Activity</a>
-					</li>
-				</ul>
 				<div class="panes">
-					<div id="photo" class="firstlevel">
+					<div id="networks" class="firstlevel">
 						<ul id="networks" class="node" style="display: block;">
 							<li>
 								<a href="http://twitter.com/marcomornati"> <img width="60" alt="Twitter" src="images/twitter.png"> <strong>Twitter</strong> twitter.com/marcomornati </a>
