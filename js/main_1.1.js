@@ -39,6 +39,7 @@ $(document).ready(function() {
 		});	
 	});
 	
+	//Add animation for screen menu
 	$('#navigation a').stop().animate({'marginLeft':'-85px'},1000);
 
     $('#navigation > li').hover(
@@ -50,11 +51,25 @@ $(document).ready(function() {
         }
     );
     
+    //Add functions for mobile menu
+    $("#selectedpages").change(function() {
+    	if ($("#selectedpages").val() == "twitter") {
+    		showTwitter();
+    	} else if ($("#selectedpages").val() == "network") {
+    		showNetwork();
+    	} else if ($("#selectedpages").val() == "profile") {
+    		showProfile();
+    	} else if ($("#selectedpages").val() == "flickr") {
+    		showFlickr();
+    	} else if ($("#selectedpages").val() == "code") {
+    		showCode();
+    	}
+    });
+    
 });
 
-function addClickMenu() {
-    $("#profilelink").click(function() {
-    	if ($("#tweetcontainer").is(":visible")) {
+function showProfile() {
+	if ($("#tweetcontainer").is(":visible")) {
     		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#flickrbox").is(":visible")) {
     		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
@@ -65,10 +80,10 @@ function addClickMenu() {
         }
     	$("#profile").animate({ height: 'show', opacity: 'show' }, 'slow');
     	changeImage('profile');
-    });
+}
 
-    $("#twitterlink").click(function() {
-        if ($("#profile").is(":visible")) {
+function showTwitter() {
+	if ($("#profile").is(":visible")) {
               $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
           } else if ($("#networks").is(":visible")) {
     		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
@@ -79,26 +94,10 @@ function addClickMenu() {
     	}
     	$("#tweetcontainer").animate({ height: 'show', opacity: 'show' }, 'slow');
     	changeImage('twitter');
-    });
+}
 
-    $("#gallerylink").click(function() {
-    	if ($("#networks").is(":visible")) {
-    		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} else if ($("#tweetcontainer").is(":visible")) {
-    		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} else if ($("#code").is(":visible")) {
-    		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} else if ($("#profile").is(":visible")) {
-            $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-        }
-    	$("#flickrbox").animate({ height: 'show', opacity: 'show' }, 'slow');
-    	$("#flickrbox").empty();
-    	markeclaudioFlickrBox("10615322@N07");
-    	changeImage('flickr');
-    });
-
-    $("#codelink").click(function() {
-    	if ($("#networks").is(":visible")) {
+function showCode() {
+	if ($("#networks").is(":visible")) {
     		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#tweetcontainer").is(":visible")) {
     		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
@@ -112,10 +111,26 @@ function addClickMenu() {
     	if(!GitHubList.initialized) {
 			GitHubList.pull();
 		}
-    });
+}
 
-    $("#networklink").click(function() {
-        if ($("#profile").is(":visible")) {
+function showFlickr() {
+	if ($("#networks").is(":visible")) {
+    		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#tweetcontainer").is(":visible")) {
+    		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#code").is(":visible")) {
+    		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+    	} else if ($("#profile").is(":visible")) {
+            $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        }
+    	$("#flickrbox").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	$("#flickrbox").empty();
+    	markeclaudioFlickrBox("10615322@N07");
+    	changeImage('flickr');
+}
+
+function showNetwork() {
+	if ($("#profile").is(":visible")) {
             $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
         } else if ($("#tweetcontainer").is(":visible")) {
             $("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
@@ -126,6 +141,27 @@ function addClickMenu() {
         }
         $("#networks").animate({ height: 'show', opacity: 'show' }, 'slow');
         changeImage('network');
+}
+
+function addClickMenu() {
+    $("#profilelink").click(function() {
+    	showProfile();	
+    });
+
+    $("#twitterlink").click(function() {
+    	showTwitter();    
+    });
+
+    $("#gallerylink").click(function() {
+    	showFlickr();
+    });
+
+    $("#codelink").click(function() {
+    	showCode();
+    });
+
+    $("#networklink").click(function() {
+        showNetwork();
     });
 }
 

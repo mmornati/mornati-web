@@ -5,7 +5,9 @@
 		<!-- Stylesheet -->
 		<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="css/jquery.markeclaudio.flikrgallery.css" type="text/css" media="screen" />
-		<link charset="utf-8" href="css/default_1.1.css" rel="stylesheet" type="text/css" />
+		<link charset="utf-8" media="screen" href="css/default_1.1.css" rel="stylesheet" type="text/css" />
+		<meta name="viewport" content="initial-scale=1.0, width=device-width" />
+		<link charset="utf-8" media="screen and (max-device-width: 1000px)" href="css/default_mobile.css" rel="stylesheet" type="text/css" />
 		<link charset="utf-8" href="css/bsod.css" rel="stylesheet" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Amaranth' rel='stylesheet' type='text/css'>
 		<!-- Javascript -->
@@ -42,6 +44,15 @@
 					<img id="areaimage" src="images/typeimages/network.png" style="position:absolute" height="128" width="128" alt="Area Image" />
 				</div>
 				<div class="pagecontent">
+					<div id="mobilemenu">
+						<select id="selectedpages">
+							<option value="profile">Profile</option>
+							<option value="twitter">Twitter</option>
+							<option value="code">Code</option>
+							<option value="flickr">Flickr</option>
+							<option value="network">Network</option>
+						</select>
+					</div>
 					<div id="networks" class="firstlevel">
 						<ul class="node">
 							<li>
