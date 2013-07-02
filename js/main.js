@@ -1,17 +1,15 @@
 $(document).ready(function() {
-	$("#network").show();
-	changeImage('network');
-	twitter_jquery("marcomornati");
-	//if(!GitHubList.initialized) {
-	//	GitHubList.pull();
-	//}
-	//markeclaudioFlickrBox("10615322@N07");
+    addClickMenu();
+	$("#profile").animate({ height: 'show', opacity: 'show' }, 'slow');
+	changeImage('profile');
 
 	$('#areaimage').click(function() {
 		$("#content").hide();
+		$("#navigation").hide();
 		$("#bsod").show();
 		$("#bsod").click(function() {
 			$('#bsod').hide();
+			$("#navigation").show();
 			$("#content").show();
 		});
 	});
@@ -19,10 +17,12 @@ $(document).ready(function() {
 	$("#closeimage").click(function() {
 		$("#content").hide();
 		$("#credits").hide();
+		$("#navigation").hide();
 		$("#gameover").show();
 		$("#gameover").click(function() {
 			$("html").unbind();	
 			$('#gameover').hide();
+			$("#navigation").show();
 			$('#content').show();
 			$("#credits").show();
 		});	
@@ -50,30 +50,37 @@ $(document).ready(function() {
         }
     );
     
-    $("#homelink").click(function() {
+});
+
+function addClickMenu() {
+    $("#profilelink").click(function() {
     	if ($("#tweetcontainer").is(":visible")) {
     		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#flickrbox").is(":visible")) {
     		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#code").is(":visible")) {
     		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} 
-    	$("#networks").animate({ height: 'show', opacity: 'show' }, 'slow');
-    	changeImage('network');
+    	} else if ($("#networks").is(":visible")) {
+            $("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        }
+    	$("#profile").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	changeImage('profile');
     });
-    
+
     $("#twitterlink").click(function() {
-    	if ($("#networks").is(":visible")) {
+        if ($("#profile").is(":visible")) {
+              $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+          } else if ($("#networks").is(":visible")) {
     		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#flickrbox").is(":visible")) {
     		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#code").is(":visible")) {
     		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} 
+    	}
     	$("#tweetcontainer").animate({ height: 'show', opacity: 'show' }, 'slow');
     	changeImage('twitter');
     });
-    
+
     $("#gallerylink").click(function() {
     	if ($("#networks").is(":visible")) {
     		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
@@ -81,12 +88,15 @@ $(document).ready(function() {
     		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#code").is(":visible")) {
     		$("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} 
+    	} else if ($("#profile").is(":visible")) {
+            $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        }
     	$("#flickrbox").animate({ height: 'show', opacity: 'show' }, 'slow');
+    	$("#flickrbox").empty();
     	markeclaudioFlickrBox("10615322@N07");
     	changeImage('flickr');
     });
-    
+
     $("#codelink").click(function() {
     	if ($("#networks").is(":visible")) {
     		$("#networks").animate({ height: 'hide', opacity: 'hide' }, 'slow');
@@ -94,65 +104,34 @@ $(document).ready(function() {
     		$("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
     	} else if ($("#flickrbox").is(":visible")) {
     		$("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
-    	} 
+    	} else if ($("#profile").is(":visible")) {
+            $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        }
     	$("#code").animate({ height: 'show', opacity: 'show' }, 'slow');
     	changeImage('code');
     	if(!GitHubList.initialized) {
 			GitHubList.pull();
 		}
     });
-});
+
+    $("#networklink").click(function() {
+        if ($("#profile").is(":visible")) {
+            $("#profile").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        } else if ($("#tweetcontainer").is(":visible")) {
+            $("#tweetcontainer").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        } else if ($("#flickrbox").is(":visible")) {
+            $("#flickrbox").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        } else if ($("#code").is(":visible")) {
+            $("#code").animate({ height: 'hide', opacity: 'hide' }, 'slow');
+        }
+        $("#networks").animate({ height: 'show', opacity: 'show' }, 'slow');
+        changeImage('network');
+    });
+}
 
 function replaceURLWithHTMLLinks(text) {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
     return text.replace(exp,"<a href='$1'>$1</a>"); 
-}
-
-function twitter_jquery(query) {
-	var twitter_api_url = 'http://search.twitter.com/search.json';
-
-	// Enable caching
-	$.ajaxSetup({
-		cache : true
-	});
-
-	// Send JSON request
-	// The returned JSON object will have a property called "results" where we find
-	// a list of the tweets matching our request query
-	$.getJSON(twitter_api_url + '?callback=?&q='+query, function(data) {
-		var user, bgcolor, tweet, postedAt, icon, userURL;
-		$('#tweets').empty();
-		$('#tweets').append("<ul>");
-		$.each(data.results, function(i, tweet) {
-			// Uncomment line below to show tweet data in Fire Bug console
-			// Very helpful to find out what is available in the tweet objects
-			//console.log(tweet);
-
-			// Before we continue we check that we got data
-			if(tweet.text != undefined) {
-
-				// Build the html string for the current tweet
-				var tweet_html
-				if(i % 2) {
-					bgcolor = "#efefef"
-				} else {
-					bgcolor = "#ddd"
-				}
-				icon = tweet.profile_image_url;
-				user = tweet.from_user;
-				userURL = "http://twitter.com/" + user;
-				tweet_text = replaceURLWithHTMLLinks(tweet.text);
-				postedAt = tweet.created_at;
-				//and here I mash it all up into a fancy li
-				tweet_html = "<li style='background-color:" + bgcolor + "; background-image: url(" + icon + "); background-repeat:no-repeat;'><strong><a href='" + userURL + "'>" + user + "</a></strong>: " + tweet_text + " <span class='time'>(" + postedAt + " GMT)</span> </li>";
-
-				// Append html string to tweet_container div
-				$('#tweets').append(tweet_html);
-			}
-			
-		});
-		$('#tweets').append("</ul>");
-	});
 }
 
 var GitHubList = {
@@ -221,5 +200,7 @@ function changeImage(area) {
 		$('#areaimage').attr('src', 'images/typeimages/github.png');	
 	} else if (area=='network') {
 		$('#areaimage').attr('src', 'images/typeimages/network.png');	
-	}	
+	} else if (area=='profile') {
+        $('#areaimage').attr('src', 'images/typeimages/profile.png');
+    }
 }
