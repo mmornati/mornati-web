@@ -129,6 +129,13 @@ function addClickMenu() {
     });
 }
 
+function loadLinkedinData() {
+    IN.API.Profile("me").result(function(result) {
+      $("#profile").html('<script type="IN/FullMemberProfile" data-id="' + result.values[0].id + '"></script>');
+      IN.parse(document.getElementById("profile"))
+   })
+}
+
 function replaceURLWithHTMLLinks(text) {
     var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
     return text.replace(exp,"<a href='$1'>$1</a>"); 
