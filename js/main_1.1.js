@@ -1,7 +1,22 @@
 $(document).ready(function() {
     addClickMenu();
-	$("#profile").animate({ height: 'show', opacity: 'show' }, 'slow');
-	changeImage('profile');
+    var pageHash = window.location.hash;
+    if (pageHash) {
+        if (pageHash == "#twitter") {
+            showTwitter();
+        } else if (pageHash == "#profile") {
+            showProfile();
+        } else if (pageHash == "#gallery") {
+            showFlickr();
+        } else if (pageHash == "#code") {
+            showCode();
+        } else if (pageHash == "#network") {
+            showNetwork();
+        }
+    } else {
+	    $("#profile").animate({ height: 'show', opacity: 'show' }, 'slow');
+	    changeImage('profile');
+    }
 
 	$('#areaimage').click(function() {
 		$("#content").hide();
