@@ -1,0 +1,22 @@
+div#flickrbox{
+   height:400px;
+   margin-top:20px;
+   margin-left:31px;
+}
+
+div#flickrbox .imagesflickr{
+    border: 2px solid black;  
+    display: inline-block!important;
+    float:left;
+    height: 100px;
+    overflow: hidden;
+    width: 100px;
+    cursor:pointer;
+    margin: 2px;
+}
+
+div#flickrbox img{
+   border:none;
+}
+
+
