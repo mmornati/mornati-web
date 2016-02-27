@@ -15,13 +15,16 @@ var GitHubList = {
 					var date = new Date(Date.parse(this.created_at));
 					var codeItem = $('<div class="commit"><span class="repository">' + this.repo.name + '</span><div class="date">' + (date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()) + '</div><div class="message" title="' + this.payload.commits[0].sha + '">' + this.payload.commits[0].sha + '</div></div>');
 					var codeDescription = $('<div class="commit-description"></div>');
-					if(this.repo.description != '') {
-						codeDescription.append('<p>' + this.repo.description + '</p>');
-					} else {
-						// codeDescription.append("<p>&lt;I'm apparently too lazy to add a description&gt;</p>");
-					}
-					codeDescription.append('<p><a class="link" href="' + this.repo.url + '">' + this.repo.url + '</a></p>');
-					codeDescription.append('<p>' + this.payload.head + '</p><code>' + this.payload.commits[0].sha + '</code><p><a href="' + this.url + '">View Commit</a></p>');
+					codeDescription.append('<p>' + this.repo.name + '</p>');
+					var repoUrl = this.repo.url.replace(/api.github.com\/repos/g, 'github.com');
+					codeDescription.append('<p><a class="link" href="' + repoUrl + '">' + repoUrl + '</a></p>');
+					var commitUrl = this.payload.commits[0].url.replace(/api.github.com\/repos/g, 'github.com');
+
+					$.get(this.payload.commits[0].url, function(commContent) {
+						$.each(commContent.files, function(i) {
+							codeDescription.append('<p>' + this.filename + '</p><code>' + this.patch + '</code><p><a targ="_blank" href="' + this.blob_url + '">View Commit</a></p>');
+						});
+				  });
 					code.append(codeItem.hide());
 					code.append(codeDescription.hide());
 					codeItem.click(function(event) {
@@ -232,7 +235,7 @@ function featureIndex_Click(e) {
 
 	jQuery(document).ready(function($) {
 
-		    //$('#nav-main').scrollspy()
+		    $("a[rel^='prettyPhoto']").prettyPhoto();
 
 		    // Localscrolling
     		$('#nav-main, .brand').localScroll();
