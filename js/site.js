@@ -3,7 +3,6 @@ var GitHubList = {
 	latestCommit : false,
 	pull : function() {
 		GitHubList.initialized = true;
-		// TODO: Catch JSON parser errors - why doesn't jQuery offer something for this?
 		$.get('https://api.github.com/users/mmornati/events', function(commits) {
 			var code = $('#githubcommit');
 			code.addClass('loading');
