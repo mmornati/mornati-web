@@ -1,82 +1,60 @@
-
-	jQuery(document).ready(function($) {
-
-		    //$('#nav-main').scrollspy()
-		    
-		    // Localscrolling 
-    		$('#nav-main, .brand').localScroll();
-     		$('#profile, .container').localScroll();
-
-		$("#flickrbox").empty();
-    		markeclaudioFlickrBox("10615322@N07");
-		if(!GitHubList.initialized) {
-			GitHubList.pull();
-		}
-
-		getFeedNewsBlock();
-
-	});
-
 var GitHubList = {
 	initialized : false,
 	latestCommit : false,
 	pull : function() {
 		GitHubList.initialized = true;
 		// TODO: Catch JSON parser errors - why doesn't jQuery offer something for this?
-		$.getScript('http://github.com/mmornati.json?callback=GitHubList.parseData&' + (new Date() - 1.0), function() {
-
-		});
-	},
-	parseData : function(commits) {
-		var code = $('#githubcommit');
-		code.addClass('loading');
-		var commitIndex = 0, fadeLength = 500;
-		$.each(commits, function(i) {
-			var date = Date.parse(this.created_at);
-			if(this.type == 'PushEvent' && this.repository && (!GitHubList.latestCommit || GitHubList.latestCommit < date)) {
-				// If it's a PushEvent, AND we haven't seen it before, add it to the list
-				commitIndex += 1;
-				var date = new Date(Date.parse(this.created_at));
-				var codeItem = $('<div class="commit"><span class="repository">' + this.repository.name + '</span><div class="date">' + (date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()) + '</div><div class="message" title="' + this.payload.shas[0][2] + '">' + this.payload.shas[0][2] + '</div></div>');
-				var codeDescription = $('<div class="commit-description"></div>');
-				if(this.repository.description != '') {
-					codeDescription.append('<p>' + this.repository.description + '</p>');
-				} else {
-					// codeDescription.append("<p>&lt;I'm apparently too lazy to add a description&gt;</p>");
-				}
-				codeDescription.append('<p><a class="link" href="' + this.repository.url + '">' + this.repository.url + '</a></p>');
-				codeDescription.append('<p>' + this.payload.head + '</p><code>' + this.payload.shas[0][2] + '</code><p><a href="' + this.url + '">View Commit</a></p>');
-				code.append(codeItem.hide());
-				code.append(codeDescription.hide());
-				codeItem.click(function(event) {
-					event.preventDefault();
-					if(codeItem.hasClass('active')) {
-						codeItem.removeClass('active');
-						codeDescription.slideUp();
+		$.get('https://api.github.com/users/mmornati/events', function(commits) {
+			var code = $('#githubcommit');
+			code.addClass('loading');
+			var commitIndex = 0, fadeLength = 500;
+			$.each(commits, function(i) {
+				var date = Date.parse(this.created_at);
+				if(this.type == 'PushEvent' && this.repo.id && (!GitHubList.latestCommit || GitHubList.latestCommit < date)) {
+					// If it's a PushEvent, AND we haven't seen it before, add it to the list
+					commitIndex += 1;
+					var date = new Date(Date.parse(this.created_at));
+					var codeItem = $('<div class="commit"><span class="repository">' + this.repo.name + '</span><div class="date">' + (date.getMonth() + 1 + '/' + date.getDate() + '/' + date.getFullYear()) + '</div><div class="message" title="' + this.payload.commits[0].sha + '">' + this.payload.commits[0].sha + '</div></div>');
+					var codeDescription = $('<div class="commit-description"></div>');
+					if(this.repo.description != '') {
+						codeDescription.append('<p>' + this.repo.description + '</p>');
 					} else {
-						codeItem.addClass('active');
-						codeDescription.slideDown();
-						code.scrollTo(codeItem, 200);
+						// codeDescription.append("<p>&lt;I'm apparently too lazy to add a description&gt;</p>");
 					}
-				});
-				var timeoutFunction = function() {
-					codeItem.fadeIn(fadeLength);
-				};
-				setTimeout(timeoutFunction, commitIndex * (fadeLength / 5));
-				this.latestCommit = this.id;
-			}
+					codeDescription.append('<p><a class="link" href="' + this.repo.url + '">' + this.repo.url + '</a></p>');
+					codeDescription.append('<p>' + this.payload.head + '</p><code>' + this.payload.commits[0].sha + '</code><p><a href="' + this.url + '">View Commit</a></p>');
+					code.append(codeItem.hide());
+					code.append(codeDescription.hide());
+					codeItem.click(function(event) {
+						event.preventDefault();
+						if(codeItem.hasClass('active')) {
+							codeItem.removeClass('active');
+							codeDescription.slideUp();
+						} else {
+							codeItem.addClass('active');
+							codeDescription.slideDown();
+							code.scrollTo(codeItem, 200);
+						}
+					});
+					var timeoutFunction = function() {
+						codeItem.fadeIn(fadeLength);
+					};
+					setTimeout(timeoutFunction, commitIndex * (fadeLength / 5));
+					this.latestCommit = this.id;
+				}
+			});
+			setTimeout(function() {
+				code.removeClass('loading');
+			}, commitIndex * (fadeLength / 5));
+			// Pull again in 20 minutes
+			setTimeout(GitHubList.pull, 1200000);
 		});
-		setTimeout(function() {
-			code.removeClass('loading');
-		}, commitIndex * (fadeLength / 5));
-		// Pull again in 20 minutes
-		setTimeout(GitHubList.pull, 1200000);
 	}
-};
-	
-	
+}
+
+
 function getFeedNewsBlock() {
-$.jQRSS('http://blog.mornati.net/feed/', { count: 3 }, function (newsFeed) {
+$.jQRSS('https://blog.mornati.net/feed/', { count: 3 }, function (newsFeed) {
     if (!newsFeed) return false;
 
     var nbc = $("#blogfeed").empty();
@@ -117,7 +95,7 @@ $.jQRSS('http://blog.mornati.net/feed/', { count: 3 }, function (newsFeed) {
 });
 }
 /*
-$("#btnUpdateNewsBlock").on("click", function (e) { 
+$("#btnUpdateNewsBlock").on("click", function (e) {
     var bakUp = $(".news-block .content").html();
     $(".news-block .content").empty();
     setTimeout(function () { getFeedNewsBlock(); }, 1000);
@@ -133,7 +111,7 @@ function getObjectLength(obj) {
 
 function createFeatures(targetParent) {
     var features = {};
-    $.jQRSS('http://api.flickr.com/services/feeds/photos_public.gne?id=58792031@N04&lang=en-us&format=rss_200', { count: 6 }, function (newsFeed) {
+    $.jQRSS('https://api.flickr.com/services/feeds/photos_public.gne?id=58792031@N04&lang=en-us&format=rss_200', { count: 6 }, function (newsFeed) {
         if (!newsFeed) return false;
         var entries;
         if (newsFeed["entries"]) { entries = newsFeed.entries } else { return false; }
@@ -160,23 +138,23 @@ function createFeatures(targetParent) {
                 text: "flickr"
             };
         }
-        
+
         var ulIndex = $("<ul />").addClass("index");
         if (getObjectLength(features) > 0) {
             for (x in features) {
                 var block = features[x],
                     liIndex = $("<li />").append($("<a />").prop("href", "javascript:void(0);")).appendTo(ulIndex);
                 feature = $("<div />").addClass("feature").appendTo(targetParent);
-    
+
                 if (x == 0) {
                     feature.addClass("selected");
                     liIndex.addClass("selected");
                 }
-    
+
                 if (block["title"]) {
                     $("<h2 />").addClass("title").text(block["title"]).prependTo(feature);
                 }
-    
+
                 if (block["image"]) {
                     var image = $("<div />").addClass("image").appendTo(feature);
                     image.prepend($("<img />"));
@@ -194,11 +172,11 @@ function createFeatures(targetParent) {
                         image.children("img").prop("title", block["image"]["title"]);
                     }
                 }
-    
+
                 if (block["blurb"]) {
                     $("<p />").addClass("blurb").text(block["blurb"]).appendTo(feature);
                 }
-    
+
                 if (block["links"]) {
                     if (block["links"][0]) {
                         var links = $("<ul />").addClass("links").appendTo(feature);
@@ -251,8 +229,26 @@ function featureIndex_Click(e) {
     subTmrFeatures = setTimeout(function () { tmrFeatures = setInterval(function () { goToNextFeature(); }, 5000); }, 15000);
 };
 
+
+
+	jQuery(document).ready(function($) {
+
+		    //$('#nav-main').scrollspy()
+
+		    // Localscrolling
+    		$('#nav-main, .brand').localScroll();
+     		$('#profile, .container').localScroll();
+
+		$("#flickrbox").empty();
+    markeclaudioFlickrBox("10615322@N07");
+		if(!GitHubList.initialized) {
+			GitHubList.pull();
+		}
+
+		getFeedNewsBlock();
+
+	});
+
 //createFeatures($("#TopFeaturesBlock").empty());
 //$("#TopFeaturesBlock .index a").on("click", featureIndex_Click);
 //tmrFeatures = setInterval(function () { goToNextFeature(); }, 5000);
-
-
