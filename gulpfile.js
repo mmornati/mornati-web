@@ -11,6 +11,7 @@ var browserSync = require('browser-sync');
 var minify = require('gulp-minify-css');
 var inject = require('gulp-inject');
 var es = require('event-stream');
+var del = require('del');
 
 gulp.task('browser-sync', function() {
   browserSync({
@@ -40,7 +41,16 @@ gulp.task('styles', function(){
 });
 
 gulp.task('scripts', function(){
-  return gulp.src('src/js/**/*.js')
+  return gulp.src([
+    'src/js/jquery.js',
+    'src/js/jquery-rss.js',
+    'src/js/jquery.flikr-markeclaudio-gallery.js',
+    'src/js/jquery.localscroll-1.2.7-min.js',
+    'src/js/jquery.prettyPhoto.js',
+    'src/js/jquery.scrollTo-1.4.2-min.js',
+    'src/js/bootstrap.js',
+    'src/js/site.js'
+  ])
     .pipe(plumber({
       errorHandler: function (error) {
         console.log(error.message);
@@ -63,9 +73,16 @@ gulp.task('html', ['scripts', 'styles', 'images'], function() {
   .pipe(gulp.dest('./dist'));
 });
 
-gulp.task('dist', ['scripts', 'styles', 'images', 'html']);
+gulp.task('clear', function (done) {
+  del(['dist']);
+  return cache.clearAll(done);
+});
 
-gulp.task('default', ['browser-sync'], function(){
+gulp.task('dist', ['clear', 'scripts', 'styles', 'images', 'html'], function() {
+  gulp.src(['src/font/**/*']).pipe(gulp.dest('dist/font'));
+});
+
+gulp.task('default', ['images', 'browser-sync'], function(){
   gulp.watch("src/css/**/*.scss", ['styles']);
   gulp.watch("src/js/**/*.js", ['scripts']);
   gulp.watch("src/*.html", ['bs-reload']);
