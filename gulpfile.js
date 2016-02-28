@@ -34,7 +34,7 @@ gulp.task('images', function(){
 gulp.task('styles', function(){
   gulp.src(['src/css/**/*.css'])
         .pipe(minify({keepBreaks: true}))
-        .pipe(concat('mornati.min.css'))
+        //.pipe(concat('mornati.min.css'))
         .pipe(autoprefixer('last 2 versions'))
         .pipe(gulp.dest('dist/css/'))
         .pipe(browserSync.reload({stream:true}))
@@ -56,7 +56,7 @@ gulp.task('scripts', function(){
         console.log(error.message);
         this.emit('end');
     }}))
-    .pipe(concat('mornati.js'))
+    //.pipe(concat('mornati.js'))
     .pipe(gulp.dest('dist/js/'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
@@ -67,8 +67,17 @@ gulp.task('scripts', function(){
 gulp.task('html', ['scripts', 'styles', 'images'], function() {
   gulp.src('./src/index.html')
   .pipe(inject(es.merge(
-    gulp.src('./dist/css/*.min.css', {read: false}),
-    gulp.src('./dist/js/*.min.js', {read: false})
+    gulp.src('./dist/css/*.css', {read: false}),
+    gulp.src([
+      './dist/js/jquery.min.js',
+      './dist/js/jquery-rss.min.js',
+      './dist/js/jquery.flikr-markeclaudio-gallery.min.js',
+      './dist/js/jquery.localscroll-1.2.7-min.min.js',
+      './dist/js/jquery.prettyPhoto.min.js',
+      './dist/js/jquery.scrollTo-1.4.2-min.min.js',
+      './dist/js/bootstrap.min.js',
+      './dist/js/site.min.js'
+    ], {read: false})
   ), { ignorePath: 'dist/', addRootSlash: false}))
   .pipe(gulp.dest('./dist'));
 });
@@ -82,8 +91,8 @@ gulp.task('dist', ['clear', 'scripts', 'styles', 'images', 'html'], function() {
   gulp.src(['src/font/**/*']).pipe(gulp.dest('dist/font'));
 });
 
-gulp.task('default', ['images', 'browser-sync'], function(){
+gulp.task('default', ['dist', 'browser-sync'], function(){
   gulp.watch("src/css/**/*.scss", ['styles']);
   gulp.watch("src/js/**/*.js", ['scripts']);
-  gulp.watch("src/*.html", ['bs-reload']);
+  gulp.watch("src/*.html", ['html', 'bs-reload']);
 });
