@@ -9,7 +9,7 @@
   "author": "Quench",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "2.23.2",
+    "browser-sync": "2.23.7",
     "del": "^3.0.0",
     "es": "0.5.2",
     "gulp": "3.9.1",
