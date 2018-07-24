@@ -22,6 +22,6 @@
     "gulp-plumber": "1.2.0",
     "gulp-rename": "latest",
     "gulp-sass": "3.2.0",
-    "gulp-uglify": "3.0.0"
+    "gulp-uglify": "3.0.1"
   }
 }
