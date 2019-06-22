@@ -1,3 +1,5 @@
+[![Greenkeeper badge](https://badges.greenkeeper.io/mmornati/mornati-web.svg)](https://greenkeeper.io/)[![Maintainability](https://api.codeclimate.com/v1/badges/d2bf48b225fe445bd40a/maintainability)](https://codeclimate.com/github/mmornati/mornati-web/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/d2bf48b225fe445bd40a/test_coverage)](https://codeclimate.com/github/mmornati/mornati-web/test_coverage)[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmmornati%2Fmornati-web.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmmornati%2Fmornati-web?ref=badge_shield)
 
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/mmornati/mornati-web.svg)](https://greenkeeper.io/)[![Maintainability](https://api.codeclimate.com/v1/badges/d2bf48b225fe445bd40a/maintainability)](https://codeclimate.com/github/mmornati/mornati-web/maintainability)[![Test Coverage](https://api.codeclimate.com/v1/badges/d2bf48b225fe445bd40a/test_coverage)](https://codeclimate.com/github/mmornati/mornati-web/test_coverage)
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmmornati%2Fmornati-web.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmmornati%2Fmornati-web?ref=badge_large)
